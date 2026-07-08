@@ -14,7 +14,7 @@ export async function POST(request: Request) {
     const userId=user._id;
     const {acceptMessages}=await request.json();
     try{
-        const updatedUser=await UserModel.findByIdAndUpdate(userId, {acceptMessages:acceptMessages},{new:true});
+        const updatedUser=await UserModel.findByIdAndUpdate(userId, {isAcceptingMessages:acceptMessages},{new:true});
         if(!updatedUser){
             return Response.json({ success: false, message: "User not found" }, { status: 404 });
         }
@@ -39,7 +39,7 @@ export async function GET(request: Request) {
     if(!foundUser){
         return Response.json({ success: false, message: "User not found" }, { status: 404 });
     }
-    return Response.json({ success: true, message: "User settings retrieved successfully", isAcceptingMessage: foundUser.isAcceptingMessages}, { status: 200 });
+    return Response.json({ success: true, message: "User settings retrieved successfully", isAcceptingMessages: foundUser.isAcceptingMessages}, { status: 200 });
     }catch(error){
         console.log(error);
         return Response.json(({ success:false, message: "Error retrieving user settings" }), { status: 500 });

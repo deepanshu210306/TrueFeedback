@@ -22,7 +22,7 @@ export async function GET(request: Request) {
                 $unwind: "$messages"
             },
             {
-                $sort: { "messages.timestamp": -1 }
+                $sort: { "messages.createdAt": -1 }
             },
             {
                 $group: {
